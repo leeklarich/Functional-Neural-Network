@@ -5,10 +5,9 @@ package vectors;
  */
 public class VecTest {
     public static void main(String[] args) {
-        double[][] x = {{1, 2, 3}, {4 , 5, 6}};
-        Vector xVec = new Vector(2, 3);
-        xVec.setArray(x);
-        double[] z = xVec.getRow(0);
+        double[][] x = {{1, 2, 3}, {4 , 5, 6}, {7, 8, 9}};
+        Vector xVec = new Vector(x);
+        double[] z = xVec.getCol(0);
         for(int i = 0; i < z.length; i++)
             System.out.println(z[i]);
     }

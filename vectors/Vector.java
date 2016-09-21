@@ -15,6 +15,11 @@ public class Vector {
         this.T = new double[m][n];
     }
 
+    public Vector(double[][] a) {
+        this.array = a;
+        this.T = this.transpose();
+    }
+
     public double[][] dot(Vector v) {
         double[][] vec;
         if(this.getCols() == v.getRows())
@@ -29,19 +34,55 @@ public class Vector {
         return vec;
     }
 
-    public double[] getRow(int index) {
-        double[] subVec = new double[this.n];
-        for(int i = 0; i < this.n; i++) {
+    public double[][] transpose(Vector v) {
+        double[][] newVec = new double[v.getRows()][v.getCols()];
+        for(int i = 0; i < newVec.length; i++) {
+            for(int j = 0; j < newVec[i].length; i++)
+                newVec[i][j] = v.getArray()[j][i];
+        }
+        return newVec;
+    }
+
+    public double[][] transpose(double[][] v) {
+        double[][] newVec = new double[v[0].length][v.length];
+        for(int i = 0; i < newVec.length; i++) {
+            for(int j = 0; j < newVec[i].length; i++)
+                newVec[i][j] = v[j][i];
+        }
+        return newVec;
+    }
+
+    public double[][] transpose() {
+        double[][] newVec = new double[this.getRows()][this.getCols()];
+        for(int i = 0; i < newVec.length; i++) {
+            for(int j = 0; j < newVec[i].length; i++)
+                newVec[i][j] = this.array[j][i];
+        }
+        return newVec;
+    }
+
+    public void setArray(double[][] array) {
+        if(this.n == array.length && this.m == array[0].length) {
+            this.array = array;
+            this.T = this.transpose();
+        }
+        else
+            this.array = null;
+    }
+
+    public double[] getCol(int index) {
+        double[] subVec = new double[this.m];
+        for(int i = 0; i < this.m; i++) {
             subVec[i] = this.array[i][index];
+            System.out.println(subVec[i]);
         }
         return subVec;
     }
 
-    public double[] getCol(int index) {return this.array[index];}
+    public double[] getRow(int index) {return this.array[index];}
     public int getRows() {return m;}
     public void setRows(int m) {this.m = m;}
     public int getCols() {return n;}
     public void setCols(int n) {this.n = n;}
     public double[][] getArray() {return array;}
-    public void setArray(double[][] array) {this.array = array;}
 }
