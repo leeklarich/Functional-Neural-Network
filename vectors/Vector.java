@@ -24,18 +24,18 @@ public class Vector {
 
     public double[][] dot(Vector v) {
         double[][] vec;
-        //if(this.getCols() == v.getRows()) {
+        if(this.getCols() == v.getRows()) {
             vec = new double[this.getRows()][v.getCols()];
             for (int i = 0; i < vec.length; i++) {
                 for (int j = 0; j < vec[i].length; j++) {
-                    for(int r = 0; r < this.getCols(); r++) {
+                    for (int r = 0; r < this.getCols(); r++) {
                         vec[i][j] += this.array[i][r] * v.getArray()[r][j];
                     }
                 }
             }
-        /*}
+        }
         else
-            return null;*/
+            return null;
         return vec;
     }
 
