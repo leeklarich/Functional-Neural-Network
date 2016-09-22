@@ -12,25 +12,30 @@ public class Vector {
         this.m = rows;
         this.n = cols;
         this.array = new double[n][m];
-        this.T = new double[m][n];
+        //this.T = new double[m][n];
     }
 
     public Vector(double[][] a) {
         this.array = a;
-        this.T = this.transpose();
+        this.m = a[0].length;
+        this.n = a.length;
+        //this.T = this.transpose();
     }
 
     public double[][] dot(Vector v) {
         double[][] vec;
-        if(this.getCols() == v.getRows())
+        //if(this.getCols() == v.getRows()) {
             vec = new double[this.getRows()][v.getCols()];
-        else
-            return null;
-        for (int i = 0; i < vec.length; i++) {
-            for (int j = 0; j < vec[i].length; j++) {
-
+            for (int i = 0; i < vec.length; i++) {
+                for (int j = 0; j < vec[i].length; j++) {
+                    for(int r = 0; r < this.getCols(); r++) {
+                        vec[i][j] += this.array[i][r] * v.getArray()[r][j];
+                    }
+                }
             }
-        }
+        /*}
+        else
+            return null;*/
         return vec;
     }
 
@@ -80,9 +85,10 @@ public class Vector {
     }
 
     public double[] getRow(int index) {return this.array[index];}
-    public int getRows() {return m;}
+    public int getRows() {return n;}
     public void setRows(int m) {this.m = m;}
-    public int getCols() {return n;}
+    public int getCols() {return m;}
     public void setCols(int n) {this.n = n;}
     public double[][] getArray() {return array;}
+    public double[][] getT() {return this.T;}
 }
